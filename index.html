@@ -79,6 +79,22 @@
             flex: 1;
         }
 
+        @keyframes disappearText {
+            0% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(80px) scale(0.6);
+            }
+        }
+
+        .commandInput.disappear {
+            animation: disappearText 0.6s ease-in-out forwards;
+        }
+
         .multiLineBox {
             display: flex;
             align-items: flex-start;
@@ -903,6 +919,14 @@
                     input.disabled = true;
 
                     let shouldCreateLine = executeCommand(command);
+
+                    if (command === "김현우" && isDark === false) {
+                        input.classList.add("disappear");
+
+                        setTimeout(function() {
+                            input.value = "";
+                        }, 600);
+                    }
 
                     if (shouldCreateLine) {
                         createLine();

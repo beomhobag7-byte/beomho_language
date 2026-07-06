@@ -724,7 +724,10 @@
                 Question = null;
                 return true;
             }
-            else if (command === "황소윤") printOutput("현재어 >>> 지구 대표 귀요미(오피셜)"); // 오피셜
+            else if (command === "황소윤") {
+                printOutput("현재어 >>> 지구 대표 귀요미(오피셜)"); 
+                printOutput("범호어 >>> 답이 12인데 36으로 틀려버림(오피셜)");
+            } // 오피셜
             else if (command === "조은빛") printOutput("김도윤");
             else if (command === "김도윤") printOutput("조은빛");
             else if (command === "여윤우") printOutput("전라도");
@@ -751,6 +754,7 @@
                 printOutput("정세윤");
                 printOutput("김현우");
                 printOutput(";;");
+                printOutput("이한성")
                 printOutput("조은빛");
                 printOutput("김도윤");
                 printOutput("여윤우");
@@ -848,6 +852,9 @@
                 else {
                     printOutput("죽었음");
                 }
+            }
+            else if (command === "이한성") {
+                printOutput("잠자는 숲속의 공주");
             }
             else if (command === ";;") {
                 let choo

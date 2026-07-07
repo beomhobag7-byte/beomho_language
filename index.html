@@ -860,7 +860,7 @@
             else if (command === "임제민") {
                 printOutput("연애하고싶다.");
             }
-            else if (command === "화이트모드") {
+            else if (command === "화이트모드" || command === "화이트 모드") {
                 if (isDark===true){
                     changeMode()
                     printOutput("화이트모드로 변경했습니다");
@@ -869,7 +869,7 @@
                     printOutput("이미 화이트모드입니다");
                 }
             }
-            else if (command === "다크모드") {
+            else if (command === "다크모드" || command === "다크 모드") {
                 if (isDark===false){
                     changeMode()
                     printOutput("다크모드로 변경했습니다");

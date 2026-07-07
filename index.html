@@ -52,6 +52,18 @@
             color: black;
         }
 
+        .icon {
+            display: flex;
+            margin: 20px;
+            background-color: #0b6f5a;
+            width: 70px;
+            height: 70px;
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20%;
+        }
         #console {
             margin-left: 20px;
             font-size: 24px;
@@ -205,6 +217,10 @@
             border-radius: 100%;
         }
 
+        .parenttitle {
+            display: flex;
+            background-color: white;
+        }
         .parent2 {
             background-color: gray;
             width: 30px;
@@ -223,12 +239,125 @@
             z-index: 3;
             border-radius: 100%;
         }
+
+        .titleBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mainTitle {
+            font-size: 50px;
+            margin: 0;
+        }
+
+        .titleBox .gray {
+            margin: 0;
+            color: gray;
+        }
+
+        .titleLine {
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            margin: 30px 20px;
+        }
+
+        /* 전체 기본값 */
+        body {
+            padding-bottom: 85px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .parenttitle {
+            align-items: center;
+            gap: 0;
+        }
+
+        /* 아래 버튼: 일부러 과한 그림자 없이 단순하게 만들었습니다. */
+        .bottomButtons {
+            position: fixed;
+            left: 30px;
+            bottom: 24px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .menuBtn {
+            background-color: white;
+            color: #777;
+            border: 1px solid #dedbd6;
+            border-radius: 22px;
+            padding: 9px 18px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .menuBtn:hover {
+            color: #0b7a61;
+            border-color: #0b7a61;
+        }
+
+        .prompt {
+            color: #0b7a61;
+        }
+
+        /* 다크모드 */
+        .dark .parenttitle {
+            background-color: black;
+        }
+
+        .dark .icon {
+            background-color: #0b6f5a;
+        }
+
+        .dark .gray {
+            color: #a8a8a8;
+        }
+
+        .dark .titleLine {
+            background-color: #333;
+        }
+
+        .dark .output {
+            color: #aaa;
+        }
+
+        .dark .menuBtn {
+            background-color: black;
+            color: #bdbdbd;
+            border-color: #444;
+        }
+
+        .dark .menuBtn:hover {
+            color: #54d6ad;
+            border-color: #54d6ad;
+        }
+
+        .dark .prompt {
+            color: #54d6ad;
+        }
+
+        .dark .parent1,
+        .dark .parent2,
+        .dark .parent3 {
+            background-color: #555;
+        }
+
     </style>
 </head>
-
 <body class="light" id="a">
-    
-    <h1 class="center" style="font-size: 70px;">범호어</h1>
+    <div class="parenttitle">
+    <div class="icon"><h1>BH</h1></div>
+
+    <div class="titleBox">
+        <h1 class="mainTitle">범호어</h1>
+        <h3 class="gray">커스텀 프로그래밍 언어 콘솔</h3>
+    </div>
+</div>
+<hr class="titleLine">
         <div class="wrap" onclick="changeMode()">
             <div class="parent1"></div>
             <div class="parent2"></div>
@@ -236,6 +365,13 @@
             <button class="button left" id="modeButton">🌙</button>
         </div>
     <div id="console"></div>
+
+    <div class="bottomButtons">
+        <button type="button" class="menuBtn" onclick="runMenuCommand('명령어 모음')">명령어 모음</button>
+        <button type="button" class="menuBtn" onclick="runMenuCommand('사용지침')">사용지침</button>
+        <button type="button" class="menuBtn" onclick="runMenuCommand('반복')">반복</button>
+        <button type="button" class="menuBtn" onclick="runMenuCommand('변수목록')">변수목록</button>
+    </div>
 
     <script>
         let banbok = 0;
@@ -1030,6 +1166,37 @@
 
                 createLine();
             };
+        }
+
+
+        function runMenuCommand(command) {
+            const inputs = consoleBox.querySelectorAll(".commandInput");
+            const currentInput = inputs[inputs.length - 1];
+
+            if (currentInput && currentInput.disabled === false) {
+                currentInput.value = command;
+                currentInput.disabled = true;
+            } else {
+                const line = document.createElement("div");
+                line.className = "line";
+
+                const prompt = document.createElement("span");
+                prompt.className = "prompt";
+                prompt.innerText = "범호어>>>";
+
+                const commandText = document.createElement("span");
+                commandText.innerText = command;
+
+                line.appendChild(prompt);
+                line.appendChild(commandText);
+                consoleBox.appendChild(line);
+            }
+
+            let shouldCreateLine = executeCommand(command);
+
+            if (shouldCreateLine) {
+                createLine();
+            }
         }
 
         function printOutput(text) {

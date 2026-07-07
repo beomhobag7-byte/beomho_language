@@ -861,6 +861,24 @@
             else if (command === "임제민") {
                 printOutput("연애하고싶다.");
             }
+            else if (command === "화이트모드") {
+                if (isDark===true){
+                    changeMode()
+                    printOutput("화이트모드로 변경했습니다");
+                }
+                else {
+                    printOutput("이미 화이트모드입니다");
+                }
+            }
+            else if (command === "다크모드") {
+                if (isDark===false){
+                    changeMode()
+                    printOutput("다크모드로 변경했습니다");
+                }
+                else {
+                    printOutput("이미 다크모드입니다");
+                }
+            }
             else if (command === "이현재") {
                 printOutput("그는 누구인가");
                 printOutput("이현재, 그는 전설 속에서 모든 것의 시작이자 끝이라 불리는 존재이다.");

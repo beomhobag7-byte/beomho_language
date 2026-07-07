@@ -78,6 +78,22 @@
             color: inherit;
             flex: 1;
         }
+        @keyframes bigText {
+            0% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(20px) scale(1.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1.5);
+            }
+        }
 
         @keyframes disappearText {
             0% {
@@ -93,6 +109,12 @@
 
         .commandInput.disappear {
             animation: disappearText 0.6s ease-in-out forwards;
+        }
+
+        .commandInput.bigText {
+            animation: bigText 0.6s ease-in-out forwards;
+            transform-origin: left center;
+            font-weight: bold;
         }
 
         .multiLineBox {
@@ -920,7 +942,10 @@
 
                     let shouldCreateLine = executeCommand(command);
 
-                    if (command === "김현우" && isDark === false) {
+                    if (command === "김현우" && isDark === true) {
+                        input.classList.add("bigText");
+                    }
+                    else if (command === "김현우" && isDark === false) {
                         input.classList.add("disappear");
 
                         setTimeout(function() {
@@ -987,6 +1012,7 @@
             output.innerText = text;
             consoleBox.appendChild(output);
         }
+        const a = 0
 
         createLine();
     </script>
